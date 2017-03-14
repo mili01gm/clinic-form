@@ -17,7 +17,7 @@ function printAll(arr){
   var div = document.createElement('div');
   div.setAttribute('class',"patient");
   var p1 = document.createElement('p');
-  p1.innerHTML = "Nombre:" + arr.nombre + " " + arr.apellido
+  p1.innerHTML = "Nombre: " + arr.nombre + " " + arr.apellido
   var p2 = document.createElement('p');
   p2.innerHTML = "Edad: " + arr.edad
   var p3 = document.createElement('p');
@@ -43,7 +43,6 @@ window.addEventListener('load',function(){
 
 
   boton.addEventListener('click', function(e){
-    e.preventDefault();
     var paciente = new Pacientes(nombre.value,apellido.value,edad.value,genero.value,ciudad.value,pais.value);
     registros.push(paciente);
 
@@ -55,6 +54,7 @@ window.addEventListener('load',function(){
       error.innerHTML = ""
       //console.log(registros);
       //mostrar.innerHTML = paciente.addRegister()
+      e.preventDefault();
       mostrar.appendChild(printAll(paciente));}
   });
 
