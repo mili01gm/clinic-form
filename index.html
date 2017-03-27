@@ -15,17 +15,22 @@
     <p>Complete los datos del paciente en el siguiente formulario:</p>
     <br>
     <form action="" id="completa">
-      <input type="text" id="nombre" placeholder="Nombre" autofocus><br><br>
-      <input type="text" id="apellido" placeholder="Apellido"><br><br>
-      <input type="text" id="edad" placeholder="Edad"><br><br>
+      <input type="text" class="ingresos" id="nombre" placeholder="Nombre" autofocus><br>
+      <span></span><br>
+      <input type="text" class="ingresos" id="apellido" placeholder="Apellido"><br>
+      <span></span><br>
+      <input type="text" class="ingresos" id="edad" placeholder="Edad"><br>
+      <span></span><br>
   <!--     <input type="text" id="genero" placeholder="Género" /><br /> -->
       <select name="generos" id="genero">
         <option hidden="">Elige tu género</option>
         <option value="femenino">Femenino</option>
         <option value="masculino">Masculino</option>
       </select><br><br>
-      <input type="text" id="ciudad" placeholder="Ciudad" /><br><br>
-      <input type="text" id="pais" placeholder="País" /><br><br>
+      <input type="text" class="ingresos" id="ciudad" placeholder="Ciudad" /><br>
+      <span></span><br>
+      <input type="text" class="ingresos" id="pais" placeholder="País" /><br>
+      <span></span><br>
       <button type="button" id="enviar">Inscribir Paciente</button><br>
       <!-- <button type="reset">Nuevo Paciente</button><br> -->
       <span id="error"></span>

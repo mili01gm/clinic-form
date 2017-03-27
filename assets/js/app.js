@@ -30,6 +30,7 @@ window.addEventListener('load',function(elem){
   var apellido = document.getElementById('apellido');
   var edad = document.getElementById('edad');
   var genero = document.getElementById('genero');
+  var soy = genero.options[genero.selectedIndex];
   var ciudad = document.getElementById('ciudad');
   var pais = document.getElementById('pais');
   var error = document.getElementById('error');
@@ -38,18 +39,22 @@ window.addEventListener('load',function(elem){
   var pattern = /([A-Z]{1}[a-zá-ú]{1,}\s?)/;
   var registros = [];
 
-  var letrasOnly = function(e){
-    var codeLetra = e.keyCode;
+  var letrasOnly = function(elem){
+    var codeLetra = elem.keyCode;
     if((codeLetra>96&&codeLetra<=122)||(codeLetra>=65&&codeLetra<=90)||codeLetra==32||codeLetra==164||codeLetra==165){
       return true;
-    } else { return false;}
+    } else {
+      this.nextElementSibling.nextElementSibling.innerHTML = "Ingresar solo letras";
+      return false;}
   }
 
-  var numOnly = function(e){
-    var codeNum = e.keyCode;
+  var numOnly = function(elem){
+    var codeNum = elem.keyCode;
     if(codeNum>47&&codeNum<58){
       return true;
-    } else {return false;}
+    } else {
+      this.nextElementSibling.nextElementSibling.innerHTML = "Ingresar solo números";
+      return false;}
   }
 
   nombre.onkeypress = letrasOnly;
@@ -58,28 +63,65 @@ window.addEventListener('load',function(elem){
   pais.onkeypress = letrasOnly;
   edad.onkeypress = numOnly;
 
+  var ingresos = document.getElementsByClassName('ingresos');
+  var validando = function(){
+    if(this.value.trim().length == 0){
+      this.value="";
+      this.nextElementSibling.nextElementSibling.innerHTML = "Este campo es obligatorio"
+    } else {
+      this.nextElementSibling.nextElementSibling.innerHTML = ""
+    }
+    var info = this.value.split(" ");
+    var modifMayus = "";
+    info.forEach(function(e){
+      modifMayus +=  e.charAt(0).toUpperCase()+e.substring(1).toLowerCase()+" ";
+    });
+    this.value = modifMayus;
+  }
+
+  for(var i = 0; i <ingresos.length; i++){
+    ingresos[i].onblur = validando;
+  }
 
   boton.addEventListener('click', function(e){
-    e.preventDefault();
-    var paciente = new Pacientes(nombre.value,apellido.value,edad.value,genero.value,ciudad.value,pais.value);
-    registros.push(paciente);
-
-    if(name.value==""||apellido.value==""||edad.value==""||genero.value=""||ciudad.value==""||pais.value==""){
-      error.innerHTML = "Debe completar todos los campos para la inscripción"
-    } else if(edad.value < 1){
-      errorEdad.innerHTML = "Ingrese una edad válida"
-    } else if (!pattern.test(nombre.value)||!pattern.test(apellido.value)||!pattern.test(ciudad.value)||!pattern.test(pais.value)){
-      error.innerHTML = "Complete los campos con la primera letra en mayúscula"
-    } else {
-
-      error.innerHTML = ""
-      errorEdad.innerHTML = ""
-      //console.log(registros);
-      //mostrar.innerHTML = paciente.addRegister()
+    for(var i = 0; i< ingresos.length;i++){
+      if(ingresos[i].value.length > 0 && soy.value != ""){
+      e.preventDefault();
+      var paciente = new Pacientes(nombre.value,apellido.value,edad.value,genero.value,ciudad.value,pais.value);
+      registros.push(paciente);
       mostrar.appendChild(printAll(paciente));
       document.getElementById('completa').reset();
+      }
     }
 
   });
+
+
+  // boton.addEventListener('click', function(e){
+  //   e.preventDefault();
+  //   var paciente = new Pacientes(nombre.value,apellido.value,edad.value,genero.value,ciudad.value,pais.value);
+  //   registros.push(paciente);
+  //   console.log(paciente);
+  //   for(var j = 0; j<ingresos.length; j++){
+  //     if(ingresos[i].length > 0){
+  //
+  //     }
+  //   }
+  //   // if(name.value==""||apellido.value==""||edad.value==""||soy==""||ciudad.value==""||pais.value==""){
+  //   //   error.innerHTML = "Debe completar todos los campos para la inscripción"
+  //   // } else if(edad.value < 1){
+  //   //   errorEdad.innerHTML = "Ingrese una edad válida"
+  //   // } else if (!pattern.test(nombre.value)||!pattern.test(apellido.value)||!pattern.test(ciudad.value)||!pattern.test(pais.value)){
+  //   //   error.innerHTML = "Complete los campos con la primera letra en mayúscula"
+  //   // } else {
+  //   //
+  //   //   error.innerHTML = ""
+  //     //console.log(registros);
+  //     //mostrar.innerHTML = paciente.addRegister()
+  //     mostrar.appendChild(printAll(paciente));
+  //     document.getElementById('completa').reset();
+  //   // }
+  //
+  // });
 
 });
