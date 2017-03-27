@@ -5,12 +5,6 @@ function Pacientes(nombre,apellido,edad,genero,ciudad,pais){
   this.genero = genero;
   this.ciudad = ciudad;
   this.pais = pais;
-
-  this.addRegister = function(){
-    return  "Nombre: "+this.nombre+" "+this.apellido + "<br />"+
-            "Edad: "+this.edad + "<br />"+
-            "País: "+this.pais
-    }
 }
 
 function printAll(arr){
@@ -28,7 +22,9 @@ function printAll(arr){
   return div;
 }
 
-window.addEventListener('load',function(){
+
+window.addEventListener('load',function(elem){
+  elem.preventDefault();
   var boton = document.getElementById('enviar');
   var nombre = document.getElementById('nombre');
   var apellido = document.getElementById('apellido');
@@ -37,25 +33,53 @@ window.addEventListener('load',function(){
   var ciudad = document.getElementById('ciudad');
   var pais = document.getElementById('pais');
   var error = document.getElementById('error');
+  var errorEdad = document.getElementById('errorEdad');
   var mostrar = document.getElementById('mostrar');
   var pattern = /([A-Z]{1}[a-zá-ú]{1,}\s?)/;
   var registros = [];
 
+  var letrasOnly = function(e){
+    var codeLetra = e.keyCode;
+    if((codeLetra>96&&codeLetra<=122)||(codeLetra>=65&&codeLetra<=90)||codeLetra==32||codeLetra==164||codeLetra==165){
+      return true;
+    } else { return false;}
+  }
+
+  var numOnly = function(e){
+    var codeNum = e.keyCode;
+    if(codeNum>47&&codeNum<58){
+      return true;
+    } else {return false;}
+  }
+
+  nombre.onkeypress = letrasOnly;
+  apellido.onkeypress = letrasOnly;
+  ciudad.onkeypress = letrasOnly;
+  pais.onkeypress = letrasOnly;
+  edad.onkeypress = numOnly;
+
 
   boton.addEventListener('click', function(e){
+    e.preventDefault();
     var paciente = new Pacientes(nombre.value,apellido.value,edad.value,genero.value,ciudad.value,pais.value);
     registros.push(paciente);
 
-    if(name.value==""||apellido.value==""||edad.value==""||genero.value=="genero"||ciudad.value==""||pais.value==""){
-      error.innerHTML = "Debe completar todos los datos requeridos"
+    if(name.value==""||apellido.value==""||edad.value==""||genero.value=""||ciudad.value==""||pais.value==""){
+      error.innerHTML = "Debe completar todos los campos para la inscripción"
+    } else if(edad.value < 1){
+      errorEdad.innerHTML = "Ingrese una edad válida"
     } else if (!pattern.test(nombre.value)||!pattern.test(apellido.value)||!pattern.test(ciudad.value)||!pattern.test(pais.value)){
       error.innerHTML = "Complete los campos con la primera letra en mayúscula"
     } else {
+
       error.innerHTML = ""
+      errorEdad.innerHTML = ""
       //console.log(registros);
       //mostrar.innerHTML = paciente.addRegister()
-      e.preventDefault();
-      mostrar.appendChild(printAll(paciente));}
+      mostrar.appendChild(printAll(paciente));
+      document.getElementById('completa').reset();
+    }
+
   });
 
 });

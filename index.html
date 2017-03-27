@@ -4,33 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>Clinic-Lab</title>
   <link rel="stylesheet" href="assets/css/main.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 <body>
-  <div class="formulario" align="center">
+  <div class="formulario">
     <h1>Clinica Lab</h1>
     <h3>Inscripción de Pacientes</h3>
     <p>Complete los datos del paciente en el siguiente formulario:</p>
     <br>
-    <form action="">
-      <input type="text" id="nombre" placeholder="Nombre" /><br><br>
-      <input type="text" id="apellido" placeholder="Apellido" /><br><br>
-      <input type="number" id="edad" placeholder="Edad"/><br><br>
+    <form action="" id="completa">
+      <input type="text" id="nombre" placeholder="Nombre" autofocus><br><br>
+      <input type="text" id="apellido" placeholder="Apellido"><br><br>
+      <input type="text" id="edad" placeholder="Edad"><br>
+      <span id="errorEdad"></span><br>
   <!--     <input type="text" id="genero" placeholder="Género" /><br /> -->
       <select name="generos" id="genero">
-        <option value="elige">Elige tu género</option>
+        <option hidden="">Elige tu género</option>
         <option value="femenino">Femenino</option>
         <option value="masculino">Masculino</option>
       </select><br><br>
       <input type="text" id="ciudad" placeholder="Ciudad" /><br><br>
       <input type="text" id="pais" placeholder="País" /><br><br>
-      <button type="submit" id="enviar">Inscribir Paciente</button>
-      <button type="reset">Nuevo Paciente</button><br>
+      <button type="button" id="enviar">Inscribir Paciente</button><br>
+      <!-- <button type="reset">Nuevo Paciente</button><br> -->
       <span id="error"></span>
-    </form><br><br>
-
+    </form><br>
     <div id="mostrar"></div>
   </div>
   <script src="assets/js/app.js"></script>
