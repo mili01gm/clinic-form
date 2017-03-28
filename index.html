@@ -10,26 +10,32 @@
 </head>
 <body>
   <div class="formulario">
-    <h1>Clinica Lab</h1>
+    <h1>Clinic Lab</h1>
     <h3>Inscripción de Pacientes</h3>
     <p>Complete los datos del paciente en el siguiente formulario:</p>
     <br>
     <form action="" id="completa">
-      <input type="text" class="ingresos" id="nombre" placeholder="Nombre" autofocus><br>
+      <label for="">Nombre:</label><br>
+      <input type="text" class="ingresos" id="nombre" placeholder="Nombre" autofocus required><br>
       <span></span><br>
-      <input type="text" class="ingresos" id="apellido" placeholder="Apellido"><br>
+      <label for="">Apellido:</label><br>
+      <input type="text" class="ingresos" id="apellido" placeholder="Apellido" required><br>
       <span></span><br>
-      <input type="text" class="ingresos" id="edad" placeholder="Edad"><br>
+      <label for="">Edad:</label><br>
+      <input type="text" class="ingresos" id="edad" placeholder="Edad" required><br>
       <span></span><br>
   <!--     <input type="text" id="genero" placeholder="Género" /><br /> -->
+      <label for="">Género:</label><br>
       <select name="generos" id="genero">
-        <option hidden="">Elige tu género</option>
+        <option value="" hidden="">Elige tu género</option>
         <option value="femenino">Femenino</option>
         <option value="masculino">Masculino</option>
       </select><br><br>
-      <input type="text" class="ingresos" id="ciudad" placeholder="Ciudad" /><br>
+      <label for="">Ciudad:</label><br>
+      <input type="text" class="ingresos" id="ciudad" placeholder="Ciudad" required><br>
       <span></span><br>
-      <input type="text" class="ingresos" id="pais" placeholder="País" /><br>
+      <label for="">País:</label><br>
+      <input type="text" class="ingresos" id="pais" placeholder="País" required><br>
       <span></span><br>
       <button type="button" id="enviar">Inscribir Paciente</button><br>
       <!-- <button type="reset">Nuevo Paciente</button><br> -->

@@ -30,7 +30,7 @@ window.addEventListener('load',function(elem){
   var apellido = document.getElementById('apellido');
   var edad = document.getElementById('edad');
   var genero = document.getElementById('genero');
-  var soy = genero.options[genero.selectedIndex];
+  // var soy = genero.option[genero.selectedIndex];
   var ciudad = document.getElementById('ciudad');
   var pais = document.getElementById('pais');
   var error = document.getElementById('error');
@@ -39,16 +39,16 @@ window.addEventListener('load',function(elem){
   var pattern = /([A-Z]{1}[a-zá-ú]{1,}\s?)/;
   var registros = [];
 
-  var letrasOnly = function(elem){
+  function letrasOnly(elem){
     var codeLetra = elem.keyCode;
-    if((codeLetra>96&&codeLetra<=122)||(codeLetra>=65&&codeLetra<=90)||codeLetra==32||codeLetra==164||codeLetra==165){
+    if((codeLetra>96&&codeLetra<=122)||(codeLetra>159&&codeLetra<164)||codeLetra==130||(codeLetra>=65&&codeLetra<=90)||codeLetra==32||codeLetra==164||codeLetra==165){
       return true;
     } else {
       this.nextElementSibling.nextElementSibling.innerHTML = "Ingresar solo letras";
       return false;}
   }
 
-  var numOnly = function(elem){
+  function numOnly(elem){
     var codeNum = elem.keyCode;
     if(codeNum>47&&codeNum<58){
       return true;
@@ -81,17 +81,24 @@ window.addEventListener('load',function(elem){
 
   for(var i = 0; i <ingresos.length; i++){
     ingresos[i].onblur = validando;
+    // boton.removeAttribute('disabled');
   }
 
   boton.addEventListener('click', function(e){
-    for(var i = 0; i< ingresos.length;i++){
-      if(ingresos[i].value.length > 0 && soy.value != ""){
-      e.preventDefault();
-      var paciente = new Pacientes(nombre.value,apellido.value,edad.value,genero.value,ciudad.value,pais.value);
-      registros.push(paciente);
-      mostrar.appendChild(printAll(paciente));
+    e.preventDefault();
+    var paciente = new Pacientes(nombre.value,apellido.value,edad.value,genero.value,ciudad.value,pais.value);
+    // registros.push(paciente);
+
+    if(nombre.value==" "||apellido.value==" "||edad.value==" "||genero.value==" "||ciudad.value==" "||pais.value==" "){
+      error.innerHTML = "Complete todos los campos"
+    } else {
+      // boton.removeAttribute('disabled');
+      error.innerHTML = ""
+      console.log(paciente);
+      // mostrar.appendChild(printAll(paciente));
       document.getElementById('completa').reset();
-      }
+      localStorage.setItem("inscrito",JSON.stringify(paciente));
+      window.location = "assets/pages/bienvenida.html"
     }
 
   });
